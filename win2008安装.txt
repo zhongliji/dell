@@ -1,0 +1,18 @@
+diskpart分区
+list disk 
+sel disk x
+creat part pri size=xxxx
+active
+format quick
+assign letter x
+exit
+
+net use挂载
+net use i: \\192.168.20.6\share liyang@008 /user:sog
+
+imagex安装
+imagex /apply i:\win08.wim 1 x:
+
+bcdboot引导
+bcdboot x:\windows /s x:
+

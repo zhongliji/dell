@@ -1,0 +1,85 @@
+ssh connection cmcip #save session
+
+进入cmc界面后，输入用户名root密码calvin（缺省的），如果您更改过用户信息的话的话，用您改完的信息进入。
+
+
+然后依次运行以下命令：
+
+getversion
+getioinfo
+getdcinfo
+racdump
+dumplogs
+
+
+getsvctag
+
+exit
+
+然后将c盘根目录下的session.log发给工程师，工程师会对日志进行分析判断。 
+
+
+
+racadm help
+
+$ help
+ 
+ help            -- list racadm subcommand description
+ help <subcommand> -- display usage summary for a subcommand
+ ?               -- list racadm subcommand description
+ ? <subcommand>  -- display usage summary for a subcommand
+ arp             -- display the networking arp table
+ chassisaction   -- execute chassis or switch power-up/down/cycle or KVM powercycle
+ closessn        -- close a session
+ clrraclog       -- clear the CMC log
+ clrsel          -- clear the System Event Log (SEL)
+ cmcchangeover   -- changes the redundant state of the CMC from active to standby and vice versa
+ config          -- modify CMC configuration properties
+ connect         -- connect to switch or blade serial console
+ deploy          -- deploy blade by specifying required properties
+ feature         -- display features active on the chassis / feature deactivation
+ featurecard     -- feature card status and list the available features
+ fwupdate        -- update the firmware on a CMC, server, IOM inf, or KVM
+ getassettag     -- display asset tag
+ getchassisname  -- get the chassisname
+ getconfig       -- display CMC configuration properties
+ getdcinfo       -- display general I/O module and DC configuration information
+ getfanreqinfo   -- display fan request information for Servers and Switches
+ getflexaddr     -- display Flexaddress enablement status for all slots and fabrics.
+ getioinfo       -- display general IO information
+ getkvminfo      -- display the KVM module information
+ getled          -- display the LED settings on a module
+ getmacaddress   -- get MAC/WWN addresses
+ getmodinfo      -- get module configuration and status information
+ getniccfg       -- display network settings for modules
+ getpbinfo       -- get power budget status information
+ getpminfo       -- get power management status information
+ getraclog       -- display the CMC log
+ getractime      -- display the current CMC time
+ getredundancymode -- gets the redundancy mode of the CMC
+ getsel          -- display records from the System Event Log (SEL)
+ getsensorinfo   -- display system sensors
+ getslotname     -- gets the name of the slot in the chassis
+ getssninfo      -- display session information
+ getsvctag       -- display service tag information
+ getsysinfo      -- display general CMC and system information
+ gettracelog     -- display the CMC diagnostic trace log
+ getversion      -- display version information for modules
+ ifconfig        -- display network interface information
+
+
+racadm getniccfg -m server-1
+
+racadm setniccfg  -m server-1 -s 192.168.8.8 255.255.255.0 192.168.8.1
+
+getioinfo
+connect switch-a1
+connect switch-a2
+
+chassisaction powerup
+
+getdcinfo
+
+serveraction -m server-3 powerup
+
+serveraction -a powerup

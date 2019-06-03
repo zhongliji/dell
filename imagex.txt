@@ -1,0 +1,6 @@
+dism /mount-wim /wimfile:n:\2012.wim /index:1 /mountdir:n:\mnt
+#imagex /mount n:\2012.wim 1 n:\mnt
+Dism /get-mountedwiminfo
+dism /image:n:\mnt /get-drivers
+dism /image:N:\mnt  /add-driver /driver:N:\2012-virtio\netkvm.inf
+dism /unmount-wim /mountdir:n:\mnt /discard

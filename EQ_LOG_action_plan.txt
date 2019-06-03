@@ -1,0 +1,20 @@
+这次是讲另一个常规操作就是抓日志：
+1．	首选用telnet登录上EQ的命令行（telnet是输入group_ip）；
+2．	运行：diag命令行，系统会在根目录下生成6个.dgo后缀名的文件，此为日志文件；
+3．	使用winscp这个工具连接到group_ip，（连接协议是FTP，不是SFTP，这点需要注意），然后下传6个.dgo文件；（winscp，这工具与putty，secureCRT，一样都是常用的for linux工具，可以在网上随意下载，都是开源免费软件；
+4．	最后用附件中的日志查看工具可以看到EQ的所有硬盘状态信息，
+a.	必须把field-unpack-x0.6.exe与6个.dgo文件放在一个文件夹里；
+b.	然后用CMD切换到此文件夹；
+c.	然后运行：field-unpack-x0.6.exe  *.dgo
+d.	会在当前目录下生成一个：unpacked-diags.txt文件，这个就是日志文件了；（这个文件是发给TS分析的，我们也可以直接打开看看状态）
+
+
+user:root passwd:grpadmin
+
+update.sh -override-downgrade    #downgrade FW
+
+raidtool   #view raid policy
+
+raidtool -H 6 -f   #force spare set
+
+diskview -j   #view disk block
