@@ -1,0 +1,41 @@
+yum -y install device-mapper-multipath
+cp /usr/share/doc/device-mapper-multipath-0.4.9/multipath.conf /etc/
+systemctl enable multipathd
+systemctl start multipathd
+lsmod |grep dm
+
+[root@localhost ~]# cd /sys/class/fc_host/
+[root@localhost fc_host]# ls
+host7  host8
+[root@localhost ~]# cat /sys/class/fc_host/host7/port_name
+0x10000090fa07e3ac
+[root@localhost ~]# cat /sys/class/fc_host/host8/port_name
+0x10000090fa07e3ad
+
+# update hba status
+etho "1" > /sys/class/fc_host/host7/issue_lip
+
+multipath -ll
+
+vi /etc/multipath.conf
+multipaths {
+        multipath {
+                wwid                    364ed2aa51864120b621ab51c2b9bf4b1
+                alias                   ps6100
+                path_grouping_policy    multibus
+                failback                immediate
+                rr_weight               priorities
+                no_path_retry           5
+        }
+#       multipath {
+#               wwid                    1DEC_____321816758474
+#               alias                   red
+#       }
+}
+
+multipath -v2
+systemctl reload multipathd
+multipath -ll
+
+
+
