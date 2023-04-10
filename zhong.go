@@ -1,4 +1,4 @@
-package zhong
+package dell
 
 var Name = "钟文"
 var Phone = "13258112362"
